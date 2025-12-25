@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grant Intelligence Hub - AI-Powered Grant Success Platform</title>
+    <meta name="description" content="Transform your grant success with AI. Discover, write, and manage grants with our intelligent platform designed for nonprofits, educational institutions, and organizations.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%234F46E5'/%3E%3Cpath d='M30 40h40v20H30z' fill='white'/%3E%3Ccircle cx='40' cy='50' r='3' fill='%234F46E5'/%3E%3Ccircle cx='60' cy='50' r='3' fill='%234F46E5'/%3E%3C/svg%3E">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #4F46E5;
+            --primary-dark: #3730A3;
+            --primary-light: #E0E7FF;
+            --secondary-color: #7C3AED;
+            --accent-color: #06B6D4;
+            --success-color: #10B981;
+            --warning-color: #F59E0B;
+            --error-color: #EF4444;
+            --text-primary: #1F2937;
+            --text-secondary: #6B7280;
+            --text-light: #9CA3AF;
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F9FAFB;
+            --bg-tertiary: #F3F4F6;
+            --border-color: #E5E7EB;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 0 4rem;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--primary-light) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23E5E7EB" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.5;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary-color);
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        /* AI Chat Interface */
+        .ai-chat-section {
+            padding: 4rem 0;
+            background: var(--bg-secondary);
+        }
+
+        .chat-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--shadow-xl);
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .chat-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .chat-messages {
+            height: 400px;
+            overflow-y: auto;
+            padding: 1.5rem;
+            background: var(--bg-secondary);
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .message.ai {
+            justify-content: flex-start;
+        }
+
+        .message.user {
+            justify-content: flex-end;
+        }
+
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .message.ai .message-avatar {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+
+        .message.user .message-avatar {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .message-content {
+            max-width: 70%;
+            padding: 1rem 1.25rem;
+            border-radius: 18px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .message.ai .message-content {
+            background: white;
+            color: var(--text-primary);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .message.user .message-content {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .chat-input-container {
+            padding: 1.5rem;
+            background: white;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .chat-input-wrapper {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 1rem 1.25rem;
+            border: 2px solid var(--border-color);
+            border-radius: 25px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .chat-input:focus {
+            border-color: var(--primary-color);
+        }
+
+        .chat-send-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chat-send-btn:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 0;
+            background: var(--bg-primary);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 0;
+            background: var(--bg-secondary);
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-primary);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul li a {
+            color: #D1D5DB;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #374151;
+            padding-top: 1rem;
+            text-align: center;
+            color: #9CA3AF;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .message-content {
+                max-width: 85%;
+            }
+
+            .chat-input-wrapper {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .chat-input {
+                width: 100%;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* Typing indicator */
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 1.25rem;
+            background: white;
+            border-radius: 18px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 0.25rem;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--text-light);
+            border-radius: 50%;
+            animation: typing 1.4s infinite ease-in-out;
+        }
+
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes typing {
+            0%, 80%, 100% {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+            40% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                Grant Intelligence Hub
+            </a>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="#chat" class="cta-button">Try AI Assistant</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content fade-in-up">
+                <h1>Transform Your Grant Success with AI</h1>
+                <p>Discover, write, and manage grants with our intelligent platform. From opportunity discovery to proposal submission, we guide you through every step of the grant lifecycle.</p>
+                <div class="hero-buttons">
+                    <a href="#chat" class="btn-primary">Start Free Trial</a>
+                    <a href="#demo" class="btn-secondary">Watch Demo</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Chat Interface -->
+    <section id="chat" class="ai-chat-section">
+        <div class="container">
+            <div class="chat-container">
+                <div class="chat-header">
+                    <h2>Grant Intelligence AI Assistant</h2>
+                    <p>Ask me anything about grants, funding opportunities, or proposal writing</p>
+                </div>
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message ai">
+                        <div class="message-avatar">AI</div>
+                        <div class="message-content">
+                            Hello! I'm your Grant Intelligence AI Assistant. I can help you with:
+                            <br><br>
+                            • Finding relevant grant opportunities
+                            <br>• Writing compelling proposals
+                            <br>• Managing deadlines and compliance
+                            <br>• Analyzing success metrics
+                            <br><br>
+                            What would you like to know about grants today?
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-input-container">
+                    <div class="chat-input-wrapper">
+                        <input type="text" class="chat-input" id="chatInput" placeholder="Ask about grants, funding opportunities, or proposal writing...">
+                        <button class="chat-send-btn" id="chatSendBtn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Comprehensive Grant Lifecycle Management</h2>
+                <p>Everything you need to discover, write, and manage successful grant applications in one intelligent platform</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>AI-Powered Grant Discovery</h3>
+                    <p>Our intelligent matching algorithm scans thousands of funding opportunities daily, finding perfect matches for your organization's mission and needs.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-edit"></i>
+                    </div>
+                    <h3>Smart Proposal Writing</h3>
+                    <p>Generate compelling, tailored proposals with our AI writing assistant trained on thousands of successful grant applications.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3>Deadline Management</h3>
+                    <p>Never miss another deadline with intelligent tracking, automated reminders, and progress monitoring for all your applications.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Compliance Monitoring</h3>
+                    <p>Ensure your applications meet all requirements with automated compliance checking and real-time guidance.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Success Analytics</h3>
+                    <p>Track your grant success rates, identify improvement opportunities, and optimize your funding strategy with detailed analytics.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Team Collaboration</h3>
+                    <p>Work seamlessly with your team through shared workspaces, role-based access, and collaborative editing tools.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>$2.3B+</h3>
+                    <p>Funding Secured</p>
+                </div>
+                <div class="stat-item">
+                    <h3>15,000+</h3>
+                    <p>Active Opportunities</p>
+                </div>
+                <div class="stat-item">
+                    <h3>85%</h3>
+                    <p>Success Rate Improvement</p>
+                </div>
+                <div class="stat-item">
+                    <h3>5,000+</h3>
+                    <p>Organizations Served</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Transform Your Grant Success?</h2>
+                <p>Join thousands of organizations already using Grant Intelligence Hub to discover, write, and win more grants.</p>
+                <a href="#chat" class="btn-primary">Start Your Free Trial</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Grant Intelligence Hub</h3>
+                    <p>Empowering organizations to achieve their mission through intelligent grant management and AI-powered funding solutions.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Platform</h3>
+                    <ul>
+                        <li><a href="#">Grant Discovery</a></li>
+                        <li><a href="#">Proposal Writing</a></li>
+                        <li><a href="#">Deadline Management</a></li>
+                        <li><a href="#">Analytics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Grant Writing Guide</a></li>
+                        <li><a href="#">Success Stories</a></li>
+                        <li><a href="#">Webinars</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">API Documentation</a></li>
+                        <li><a href="#">Status</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Grant Intelligence Hub. All rights reserved. | Privacy Policy | Terms of Service</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Chat functionality
+        class GrantIntelligenceChat {
+            constructor() {
+                this.chatMessages = document.getElementById('chatMessages');
+                this.chatInput = document.getElementById('chatInput');
+                this.chatSendBtn = document.getElementById('chatSendBtn');
+                this.isTyping = false;
+                
+                this.initializeEventListeners();
+                this.predefinedResponses = this.initializePredefinedResponses();
+            }
+
+            initializeEventListeners() {
+                this.chatSendBtn.addEventListener('click', () => this.sendMessage());
+                this.chatInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        this.sendMessage();
+                    }
+                });
+            }
+
+            initializePredefinedResponses() {
+                return {
+                    'grant opportunities': {
+                        keywords: ['grant', 'opportunity', 'funding', 'find grants', 'search grants'],
+                        response: `I can help you discover relevant grant opportunities! Our AI-powered search analyzes:
+
+• **Federal Grants**: NSF, NIH, DOE, USDA, and more
+• **Foundation Grants**: Private and corporate foundations
+• **State & Local**: Regional funding opportunities
+• **International**: Global funding programs
+
+What type of organization are you representing? (Nonprofit, Educational, Small Business, etc.) This will help me provide more targeted recommendations.`
+                    },
+                    'proposal writing': {
+                        keywords: ['write', 'proposal', 'application', 'writing help', 'draft'],
+                        response: `Our AI writing assistant can help you create compelling proposals! Here's how:
+
+• **Smart Templates**: Pre-built sections for different grant types
+• **Content Generation**: AI-powered narrative development
+• **Compliance Check**: Automatic requirement verification
+• **Collaboration Tools**: Team editing and review features
+
+Would you like me to walk you through our proposal writing process or help you with a specific section?`
+                    },
+                    'deadlines': {
+                        keywords: ['deadline', 'due date', 'calendar', 'schedule', 'timeline'],
+                        response: `Never miss a deadline again! Our deadline management includes:
+
+• **Smart Calendar**: Automated deadline tracking
+• **Progress Alerts**: Milestone reminders and warnings
+• **Team Notifications**: Collaborative deadline management
+• **Priority Scoring**: Focus on high-impact opportunities
+
+I can help you set up deadline tracking for your current applications. What grants are you currently working on?`
+                    },
+                    'success rate': {
+                        keywords: ['success', 'win rate', 'analytics', 'performance', 'statistics'],
+                        response: `Our platform helps organizations improve their grant success rates by 85% on average! Here's how:
+
+• **Match Scoring**: AI-powered opportunity ranking
+• **Proposal Optimization**: Data-driven writing suggestions
+• **Historical Analysis**: Learn from successful applications
+• **Competitive Intelligence**: Understand funder preferences
+
+Would you like to see how we calculate success metrics or learn about our analytics dashboard?`
+                    },
+                    'pricing': {
+                        keywords: ['price', 'cost', 'plan', 'subscription', 'free trial'],
+                        response: `We offer flexible pricing for organizations of all sizes:
+
+• **Starter Plan**: $99/month - Perfect for small nonprofits
+• **Professional**: $299/month - Growing organizations
+• **Enterprise**: Custom pricing - Large institutions
+
+**All plans include:**
+✓ 14-day free trial
+✓ AI grant discovery
+✓ Proposal writing tools
+✓ Deadline management
+✓ 24/7 support
+
+Ready to start your free trial? I can help you choose the right plan!`
+                    },
+                    'nonprofit': {
+                        keywords: ['nonprofit', 'non-profit', 'charity', 'foundation', 'ngo'],
+                        response: `Perfect! We specialize in helping nonprofits secure funding. Our platform is designed for:
+
+• **Program Funding**: Expand your impact with targeted grants
+• **Capacity Building**: Strengthen organizational infrastructure
+• **Emergency Relief**: Rapid response funding opportunities
+• **Multi-Year Grants**: Sustainable funding strategies
+
+What's your nonprofit's focus area? (Education, Health, Environment, Social Services, etc.) This helps me recommend the most relevant funding sources.`
+                    },
+                    'education': {
+                        keywords: ['education', 'school', 'university', 'college', 'research'],
+                        response: `Educational institutions are a key focus for us! We help with:
+
+• **Research Grants**: NSF, NIH, DOE funding opportunities
+• **Program Development**: Curriculum and student support grants
+• **Infrastructure**: Technology and facility improvements
+• **Student Services**: Financial aid and support programs
+
+Are you looking for research funding, program grants, or institutional support? I can provide specific guidance based on your needs.`
+                    },
+                    'small business': {
+                        keywords: ['small business', 'startup', 'entrepreneur', 'sbir', 'sttr'],
+                        response: `Great! We help small businesses and startups access funding through:
+
+• **SBIR/STTR Programs**: Federal innovation funding
+• **State Economic Development**: Local business grants
+• **Industry-Specific**: Sector-focused opportunities
+• **Minority/Women-Owned**: Targeted funding programs
+
+What industry is your business in? This helps me identify the most relevant funding opportunities and requirements.`
+                    },
+                    'getting started': {
+                        keywords: ['start', 'begin', 'new', 'first time', 'how to'],
+                        response: `Welcome! Here's how to get started with Grant Intelligence Hub:
+
+**Step 1**: Complete your organization profile
+**Step 2**: Set your funding preferences and goals
+**Step 3**: Review AI-matched opportunities
+**Step 4**: Use our writing tools for proposals
+**Step 5**: Track deadlines and manage applications
+
+Would you like me to guide you through setting up your profile, or do you have specific questions about any of these steps?`
+                    }
+                };
+            }
+
+            sendMessage() {
+                const message = this.chatInput.value.trim();
+                if (!message || this.isTyping) return;
+
+                this.addMessage(message, 'user');
+                this.chatInput.value = '';
+                
+                this.showTypingIndicator();
+                
+                setTimeout(() => {
+                    this.hideTypingIndicator();
+                    const response = this.generateResponse(message);
+                    this.addMessage(response, 'ai');
+                }, 1500 + Math.random() * 1000);
+            }
+
+            addMessage(content, sender) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${sender}`;
+                
+                const avatar = document.createElement('div');
+                avatar.className = 'message-avatar';
+                avatar.textContent = sender === 'ai' ? 'AI' : 'You';
+                
+                const messageContent = document.createElement('div');
+                messageContent.className = 'message-content';
+                messageContent.innerHTML = content.replace(/\n/g, '<br>');
+                
+                if (sender === 'user') {
+                    messageDiv.appendChild(messageContent);
+                    messageDiv.appendChild(avatar);
+                } else {
+                    messageDiv.appendChild(avatar);
+                    messageDiv.appendChild(messageContent);
+                }
+                
+                this.chatMessages.appendChild(messageDiv);
+                this.scrollToBottom();
+            }
+
+            showTypingIndicator() {
+                this.isTyping = true;
+                const typingDiv = document.createElement('div');
+                typingDiv.className = 'message ai';
+                typingDiv.id = 'typing-indicator';
+                
+                const avatar = document.createElement('div');
+                avatar.className = 'message-avatar';
+                avatar.textContent = 'AI';
+                
+                const typingContent = document.createElement('div');
+                typingContent.className = 'typing-indicator';
+                typingContent.innerHTML = `
+                    <span>AI is typing</span>
+                    <div class="typing-dots">
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                    </div>
+                `;
+                
+                typingDiv.appendChild(avatar);
+                typingDiv.appendChild(typingContent);
+                this.chatMessages.appendChild(typingDiv);
+                this.scrollToBottom();
+            }
+
+            hideTypingIndicator() {
+                const typingIndicator = document.getElementById('typing-indicator');
+                if (typingIndicator) {
+                    typingIndicator.remove();
+                }
+                this.isTyping = false;
+            }
+
+            generateResponse(message) {
+                const lowerMessage = message.toLowerCase();
+                
+                // Check for predefined responses
+                for (const [category, data] of Object.entries(this.predefinedResponses)) {
+                    if (data.keywords.some(keyword => lowerMessage.includes(keyword))) {
+                        return data.response;
+                    }
+                }
+
+                // Default responses for common queries
+                if (lowerMessage.includes('hello') || lowerMessage.includes('hi')) {
+                    return `Hello! I'm here to help you navigate the world of grants and funding. Whether you're looking for opportunities, need help with proposal writing, or want to improve your success rate, I've got you covered. What can I help you with today?`;
+                }
+
+                if (lowerMessage.includes('help')) {
+                    return `I'm here to help! I can assist you with:
+
+• **Grant Discovery**: Finding relevant funding opportunities
+• **Proposal Writing**: Creating compelling applications
+• **Deadline Management**: Tracking important dates
+• **Success Analytics**: Improving your win rate
+• **Platform Navigation**: Getting the most from our tools
+
+What specific area would you like help with?`;
+                }
+
+                // Generic helpful response
+                return `That's a great question! While I can provide general guidance on grants and funding, our full AI platform offers comprehensive tools for:
+
+• Real-time grant discovery and matching
+• AI-powered proposal writing assistance  
+• Automated deadline and compliance tracking
+• Success analytics and optimization
+
+Would you like to start a free trial to explore these features in depth? Or do you have specific questions about grant funding I can help with right now?`;
+            }
+
+            scrollToBottom() {
+                this.chatMessages.scrollTop = this.chatMessages.scrollHeight;
+            }
+        }
+
+        // Initialize chat when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new GrantIntelligenceChat();
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

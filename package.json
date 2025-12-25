@@ -1,0 +1,40 @@
+{
+  "name": "grant-intelligence-hub",
+  "version": "1.0.0",
+  "description": "AI-powered grant management platform that helps organizations discover, write, and manage successful grant applications",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve . -p 3000",
+    "dev": "serve . -p 3000 --live-reload",
+    "build": "echo 'Static site - no build process needed'",
+    "test": "echo 'No tests specified'",
+    "deploy": "vercel --prod",
+    "preview": "vercel"
+  },
+  "keywords": [
+    "grants",
+    "funding",
+    "ai",
+    "nonprofit",
+    "proposal-writing",
+    "grant-management",
+    "artificial-intelligence",
+    "funding-opportunities"
+  ],
+  "author": "Grant Intelligence Hub",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/grant-intelligence-hub.git"
+  },
+  "homepage": "https://yourusername.github.io/grant-intelligence-hub",
+  "bugs": {
+    "url": "https://github.com/yourusername/grant-intelligence-hub/issues"
+  },
+  "devDependencies": {
+    "serve": "^14.2.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
